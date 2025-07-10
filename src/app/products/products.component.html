@@ -1,0 +1,68 @@
+<div class="bg-gray-100 dark:bg-gray-900 min-h-screen py-8">
+  <div class="container mx-auto px-4">
+    <!-- need to make title dynamic -->
+    <h1
+      class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-8"
+    >
+      {{ title }}
+    </h1>
+
+    <!-- Category Tabs -->
+    <div class="mb-8">
+      <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+        <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+          Categories
+        </h2>
+        <div class="flex flex-wrap gap-2">
+          <!-- All Products Tab -->
+          <button
+            (click)="onCategorySelect('all')"
+            [class]="
+              selectedCategory === 'all'
+                ? 'bg-blue-600 text-white'
+                : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+            "
+            class="px-4 py-2 rounded-lg font-medium transition duration-200 capitalize"
+          >
+            All Products
+          </button>
+
+          <!-- Category Tabs -->
+          <button
+            *ngFor="let category of categoryTaps"
+            (click)="onCategorySelect(category)"
+            [class]="
+              selectedCategory === category
+                ? 'bg-blue-600 text-white'
+                : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+            "
+            class="px-4 py-2 rounded-lg font-medium transition duration-200 capitalize"
+          >
+            {{ category.replace("-", " ") }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="flex flex-wrap gap-6 justify-center">
+      <!-- Loading State -->
+      <app-loading *ngIf="isLoading"></app-loading>
+
+      <!-- No Products State -->
+      <div
+        *ngIf="!isLoading && products && products.length === 0"
+        class="text-center text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8"
+      >
+        <p class="text-lg">No products available in this category.</p>
+      </div>
+
+      <!-- Products List -->
+      <ng-container *ngIf="!isLoading && products && products.length > 0">
+        @for (product of products; track product.id) {
+        <app-product [product]="product"></app-product>
+        }
+      </ng-container>
+    </div>
+  </div>
+</div>
