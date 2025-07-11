@@ -1,0 +1,203 @@
+<div
+  class="bg-gray-100 dark:bg-gray-900 min-h-[50vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
+>
+  <div class="max-w-md w-full space-y-8">
+    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
+      <!-- Header -->
+      <div>
+        <h2
+          class="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-white"
+        >
+          Create your account
+        </h2>
+        <p class="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
+          Or
+          <a
+            routerLink="/login"
+            class="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400"
+          >
+            sign in to your existing account
+          </a>
+        </p>
+      </div>
+
+      <!-- Registration Form -->
+      <form
+        class="mt-8 space-y-6"
+        [formGroup]="registerForm"
+        (ngSubmit)="onSubmit()"
+      >
+        <div class="space-y-4">
+          <!-- Username Field -->
+          <div>
+            <label
+              for="username"
+              class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+            >
+              Username
+            </label>
+            <input
+              id="username"
+              name="username"
+              type="text"
+              formControlName="username"
+              required
+              class="mt-1 appearance-none relative block w-full px-3 py-2 border rounded-md placeholder-gray-500 text-gray-900 dark:text-white bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+              placeholder="Enter your username"
+            />
+            <div
+              *ngIf="
+                registerForm.get('username')?.invalid &&
+                registerForm.get('username')?.touched
+              "
+              class="mt-1 text-sm text-red-600 dark:text-red-400"
+            >
+              <span *ngIf="registerForm.get('username')?.errors?.['required']"
+                >Username is required</span
+              >
+              <span *ngIf="registerForm.get('username')?.errors?.['minlength']"
+                >Username must be at least 3 characters</span
+              >
+              <span *ngIf="registerForm.get('username')?.errors?.['maxlength']"
+                >Username must be less than 20 characters</span
+              >
+            </div>
+          </div>
+
+          <!-- Email Field -->
+          <div>
+            <label
+              for="email"
+              class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+            >
+              Email Address
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              formControlName="email"
+              required
+              class="mt-1 appearance-none relative block w-full px-3 py-2 border rounded-md placeholder-gray-500 text-gray-900 dark:text-white bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+              placeholder="Enter your email address"
+            />
+            <div
+              *ngIf="
+                registerForm.get('email')?.invalid &&
+                registerForm.get('email')?.touched
+              "
+              class="mt-1 text-sm text-red-600 dark:text-red-400"
+            >
+              <span *ngIf="registerForm.get('email')?.errors?.['required']"
+                >Email is required</span
+              >
+              <span *ngIf="registerForm.get('email')?.errors?.['email']"
+                >Please enter a valid email</span
+              >
+            </div>
+          </div>
+
+          <!-- Password Field -->
+          <div>
+            <label
+              for="password"
+              class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+            >
+              Password
+            </label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              formControlName="password"
+              required
+              class="mt-1 appearance-none relative block w-full px-3 py-2 border rounded-md placeholder-gray-500 text-gray-900 dark:text-white bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+              placeholder="Enter your password"
+            />
+            <div
+              *ngIf="
+                registerForm.get('password')?.invalid &&
+                registerForm.get('password')?.touched
+              "
+              class="mt-1 text-sm text-red-600 dark:text-red-400"
+            >
+              <span *ngIf="registerForm.get('password')?.errors?.['required']"
+                >Password is required</span
+              >
+              <span *ngIf="registerForm.get('password')?.errors?.['minlength']"
+                >Password must be at least 6 characters</span
+              >
+              <span *ngIf="registerForm.get('password')?.errors?.['maxlength']"
+                >Password must be less than 20 characters</span
+              >
+            </div>
+          </div>
+
+          <!-- Confirm Password Field -->
+          <div>
+            <label
+              for="confirmPassword"
+              class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+            >
+              Confirm Password
+            </label>
+            <input
+              id="confirmPassword"
+              name="confirmPassword"
+              type="password"
+              formControlName="confirmPassword"
+              required
+              class="mt-1 appearance-none relative block w-full px-3 py-2 border rounded-md placeholder-gray-500 text-gray-900 dark:text-white bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+              placeholder="Confirm your password"
+            />
+            <div
+              *ngIf="
+                registerForm.get('confirmPassword')?.invalid &&
+                registerForm.get('confirmPassword')?.touched
+              "
+              class="mt-1 text-sm text-red-600 dark:text-red-400"
+            >
+              <span
+                *ngIf="registerForm.get('confirmPassword')?.errors?.['required']"
+                >Please confirm your password</span
+              >
+            </div>
+            <div
+              *ngIf="registerForm.errors?.['mismatch'] && registerForm.get('confirmPassword')?.touched"
+              class="mt-1 text-sm text-red-600 dark:text-red-400"
+            >
+              Passwords do not match
+            </div>
+          </div>
+        </div>
+
+        <!-- Error Message -->
+        <div
+          *ngIf="apiError"
+          class="bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-600 text-red-700 dark:text-red-200 px-4 py-3 rounded"
+        >
+          {{ apiError }}
+        </div>
+
+        <!-- Submit Button -->
+        <div>
+          <button
+            type="submit"
+            [disabled]="registerForm.invalid || apiLoading"
+            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition duration-200"
+          >
+            <span
+              *ngIf="apiLoading"
+              class="absolute left-0 inset-y-0 flex items-center pl-3"
+            >
+              <div
+                class="animate-spin rounded-full h-4 w-4 border-b-2 border-white"
+              ></div>
+            </span>
+            {{ apiLoading ? "Creating Account..." : "Create Account" }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

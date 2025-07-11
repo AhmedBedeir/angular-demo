@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { Product } from '../product';
+import { Product } from '../models/product';
 import { CommonModule } from '@angular/common';
 import { LoadingComponent } from "../loading/loading.component";
 
@@ -39,7 +39,7 @@ export class ProductDetailsComponent implements OnInit {
           if (err.status === 404) {
             this.errorMessage = 'Product not found';
           }
-          else { 
+          else {
             this.errorMessage = 'An error occurred while fetching product details';
           }
         },

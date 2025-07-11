@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Product } from '../product';
+import { Product } from '../models/product';
 import { ProductComponent } from "../product/product.component";
 import { ProductService } from '../product.service';
 import { CommonModule } from '@angular/common';
@@ -54,7 +54,7 @@ export class ProductsComponent implements OnInit {
     this.isLoading = true;
     this.selectedCategory = category;
     this.title = `Products in ${category.charAt(0).toUpperCase() + category.slice(1)}`;
-    
+
     if (category === 'all') {
       this.getProducts();
       this.title = 'Products List';
